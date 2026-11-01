@@ -1,0 +1,4 @@
+import * as p from '@/lib/platform';
+import {Content,Entry,Settings,seedSettings,seedEntries,publicContent,mediaReferences} from './model';
+export async function content():Promise<Content>{let rows=await p.allRows();if(!rows.some((r:{id:string})=>r.id==='settings')){for(const e of seedEntries)await p.putRow(e.id,'entry',e,true);await p.putRow('settings','settings',seedSettings,true);rows=await p.allRows()}return {settings:rows.find((r:{id:string})=>r.id==='settings')!.data as Settings,entries:rows.filter((r:{kind:string})=>r.kind==='entry').map((r:{data:Entry})=>r.data)}}
+export async function canReadMedia(id:string,admin:boolean){const rows=await p.allRows();const media=rows.find((r:{id:string;kind:string})=>r.id===id&&r.kind==='media');if(!media)return null;if(admin)return media.data;const c=publicContent(await content());if(!c.settings.profile.resumePublished)delete c.settings.profile.resume;return mediaReferences(c).includes(id)?media.data:null}

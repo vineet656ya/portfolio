@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "profile": {
+      "name": "Your Name",
+      "titles": "Software Developer",
+      "intro": "Building useful software.",
+      "bio": "Add your professional biography in the admin dashboard.",
+      "location": "Your location",
+      "email": "hello@example.com",
+      "cgpa": "",
+      "resumePublished": false,
+      "socials": {},
+      "learning": []
+    },
+    "sections": {
+      "hackathons": false,
+      "achievements": false,
+      "certifications": false,
+      "timeline": false,
+      "experience": false,
+      "research": false,
+      "publications": false,
+      "awards": false,
+      "gallery": false,
+      "dsa": true,
+      "skills": true,
+      "learning": true
+    },
+    "labels": {}
+  },
+  "entries": []
+}

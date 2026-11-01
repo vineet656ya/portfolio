@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useRef} from 'react';
+import {X} from 'lucide-react';
+export default function Dialog({title,children,onClose,wide=false}:{title:string;children:React.ReactNode;onClose:()=>void;wide?:boolean}){const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const dialog=ref.current;const prior=document.activeElement as HTMLElement|null;dialog?.showModal();const old=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{dialog?.close();document.body.style.overflow=old;prior?.focus()}},[]);return <dialog className={'dialog '+(wide?'dialog-wide':'')} ref={ref} aria-label={title} onCancel={e=>{e.preventDefault();onClose()}} onClick={e=>{if(e.target===ref.current)onClose()}}><div className="dialog-head"><span className="eyebrow">{title}</span><button className="icon-button" onClick={onClose} aria-label="Close dialog"><X size={20}/></button></div><div className="dialog-body">{children}</div></dialog>}
